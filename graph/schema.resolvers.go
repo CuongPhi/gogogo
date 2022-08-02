@@ -5,19 +5,29 @@ package graph
 
 import (
 	"context"
-	"fmt"
 	"gogr/graph/generated"
 	"gogr/graph/model"
+	entityModel "gogr/model"
 )
 
 // CreateTodo is the resolver for the createTodo field.
 func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
-	panic(fmt.Errorf("not implemented"))
+	//todo := &model.Todo{
+	//	Text: input.Text,
+	//	ID:   fmt.Sprintf("T%d", rand.Int()),
+	//	User: &model.User{ID: input.UserID, Name: "user " + input.UserID},
+	//}
+	//r.todos = append(r.todos, todo)
+	//return todo, nil
+
+	todo := entityModel.Todo{Text: input.Text, Done: false}
+	result := db.Create(&todo)
+	return todo, nil
 }
 
 // Todos is the resolver for the todos field.
 func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
-	panic(fmt.Errorf("not implemented"))
+	return r.todos, nil
 }
 
 // Mutation returns generated.MutationResolver implementation.
